@@ -1,5 +1,5 @@
 FROM hadoop-hive-spark-base AS base
-FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM ubuntu:22.04
 SHELL ["/bin/bash", "-i", "-c"]
 
 RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/apt/sources.list \
@@ -67,16 +67,10 @@ RUN python3 -m venv "$HOME/.venv"
 
 RUN source "$HOME/.venv/bin/activate"\
  && pip install --no-cache-dir\
-    unsloth==2024.12.4\
-    einops\
-    packaging\
-    ninja\
     findspark\
     notebook==6.5.6\
     traitlets==5.9.0\
-    ipywidgets\
- && pip install --no-cache-dir --no-deps\
-    flash-attn==2.7.0.post2
+    ipywidgets
 
 COPY run.sh /usr/local/sbin/run.sh
 RUN sudo chmod a+x /usr/local/sbin/run.sh
