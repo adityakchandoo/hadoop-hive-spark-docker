@@ -1,7 +1,6 @@
 FROM ubuntu:22.04
 
-RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/apt/sources.list \
- && apt-get -qq update  \
+RUN apt-get -qq update  \
  && DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends \
       sudo \
       openjdk-8-jdk \
